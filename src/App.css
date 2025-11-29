@@ -1,0 +1,210 @@
+:root {
+  --cor-fundo: #f3eacb;
+  --cor-tinta: #452f02;
+  --cor-tinta-clara: #5e4003;
+  --cor-texto: #2d2d2d;
+  --cor-texto-claro: #fffdf5;
+  
+  --fonte-titulo: 'Pinyon Script', cursive;
+  --fonte-botoes: 'Cinzel', serif;
+  --fonte-texto: 'Crimson Text', serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Pinyon+Script&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--fonte-texto);
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--cor-fundo);
+  background-image: url("https://www.transparenttextures.com/patterns/old-crushed-paper.png");
+}
+
+.navbar {
+  background-color: var(--cor-tinta); 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-logo {
+  font-family: var(--fonte-titulo);
+  font-size: 32px;
+  color: var(--cor-texto-claro);
+  cursor: pointer;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.hero-content {
+  min-height: 85vh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+h1 {
+  font-family: var(--fonte-titulo);
+  font-size: 130px;
+  margin: 0;
+  color: var(--cor-texto);
+  font-weight: normal;
+  text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+  line-height: 1;
+  margin-top: 30px;
+}
+
+.divider {
+  height: 2px;
+  width: 150px;
+  background: var(--cor-tinta);
+  margin: 20px 0 30px 0;
+  position: relative;
+}
+
+.divider::after {
+  content: '♦';
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--cor-fundo);
+  padding: 0 10px;
+  color: var(--cor-tinta);
+  font-size: 20px;
+}
+
+p {
+  width: 50%;
+  max-width: 600px;
+  font-family: var(--fonte-texto);
+  font-size: 24px;
+  margin-bottom: 40px;
+  color: var(--cor-texto);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.btn {
+  font-family: var(--fonte-botoes);
+  font-style: normal;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline {
+  border: 1px solid var(--cor-texto-claro);
+  color: var(--cor-texto-claro);
+  background: transparent;
+  padding: 8px 18px;
+  font-size: 14px;
+}
+
+.btn-outline:hover {
+  background: var(--cor-texto-claro);
+  color: var(--cor-tinta);
+}
+
+.btn-explore {
+  padding: 16px 40px;
+  font-size: 18px;
+  background: var(--cor-tinta);
+  color: var(--cor-texto-claro);
+  border: 1px solid var(--cor-tinta);
+  box-shadow: 0 4px 10px rgba(69, 47, 2, 0.3);
+}
+
+.btn-explore:hover {
+  background: var(--cor-tinta-clara);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(69, 47, 2, 0.4);
+}
+
+.features-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 100px 20px 120px 20px;
+  background-color: rgba(69, 47, 2, 0.03);
+  flex-wrap: wrap;
+}
+
+@keyframes floatUpIn {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.feature-card {
+  background: var(--cor-tinta);
+  border: 1px solid var(--cor-texto-claro);
+  border-radius: 12px;
+  padding: 40px 30px;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(69, 47, 2, 0.2);
+  opacity: 0;
+  animation: floatUpIn 0.8s ease-out forwards;
+}
+
+.feature-card:hover {
+  transform: translateY(-15px) scale(1.02) !important;
+  background: var(--cor-tinta-clara);
+  box-shadow: 0 15px 30px rgba(69, 47, 2, 0.4);
+  transition: all 0.4s ease;
+}
+
+.feature-card h3 {
+  font-family: var(--fonte-texto);
+  font-style: italic;
+  color: var(--cor-texto-claro);
+  font-size: 28px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 15px;
+  font-weight: normal;
+}
+
+.feature-card p {
+  font-family: var(--fonte-texto);
+  font-size: 20px;
+  color: var(--cor-texto-claro);
+  width: 100%;
+  font-style: italic;
+  margin: 0;
+  line-height: 1.4;
+}
+
+
+.footer {
+  padding: 30px;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 200;
+  color: var(--cor-tinta);
+  background-color: rgba(69, 47, 2, 0.05);
+  text-align: center;
+  font-weight: bold;
+}
