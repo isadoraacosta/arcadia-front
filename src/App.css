@@ -1,5 +1,5 @@
 :root {
-  --cor-fundo: #f3eacb;
+  --cor-fundo: #efe9d2;
   --cor-tinta: #452f02;
   --cor-tinta-clara: #5e4003;
   --cor-texto: #2d2d2d;
@@ -207,4 +207,37 @@ p {
   background-color: rgba(69, 47, 2, 0.05);
   text-align: center;
   font-weight: bold;
+}
+
+
+.form-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  background-color: var(--cor-fundo); 
+  border: 1px solid var(--cor-texto-claro);
+  color: var(--cor-tinta); 
+  font-family: var(--fonte-texto);
+  font-size: 16px;
+  border-radius: 4px;
+  box-sizing: border-box; 
+}
+
+.form-input::placeholder {
+  color: var(--cor-tinta);
+  font-style: italic;
+}
+
+.form-input:focus {
+  outline: 2px solid var(--cor-texto-claro);
+  background-color: var(--cor-fundo);
+}
+
+
+
+.feature-card.no-hover:hover {
+  transform: none !important; 
+  background: var(--cor-tinta) !important; 
+  box-shadow: 0 8px 16px rgba(69, 47, 2, 0.2) !important; 
+  cursor: default; 
 }
