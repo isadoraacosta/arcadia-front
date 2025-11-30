@@ -81,6 +81,14 @@ function Dashboard() {
           />
         </div>
 
+
+        <div onClick={() => navigate('/explorar')}>
+          <FeatureCard 
+            title="Explorar Avaliações" 
+            description="Descubra o que outros viajantes estão lendo e suas opiniões sobre obras de Arcadia."
+            delay="1.0s"
+          />
+        </div>
       </div>
     </Layout>
   );
