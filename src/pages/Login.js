@@ -9,7 +9,7 @@ function Login() {
 
 
   const [formData, setFormData] = useState({
-    email: '',
+    email: '', 
     senha: ''
   });
 
@@ -34,13 +34,14 @@ function Login() {
         body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-    
+     if (response.ok) {
         const usuario = await response.json();
-        alert(`Que bom te ver, ${usuario.nome}!`);
         
-     
-        navigate('/'); 
+        localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+       
+
+        alert(`Que bom ver você de novo, ${usuario.nome}!`);
+        navigate('/dashboard'); 
       } else {
        
         alert("Email ou senha incorretos.");

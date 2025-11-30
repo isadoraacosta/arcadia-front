@@ -241,3 +241,28 @@ p {
   box-shadow: 0 8px 16px rgba(69, 47, 2, 0.2) !important; 
   cursor: default; 
 }
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.menu-link {
+  font-family: var(--fonte-botoes);
+  text-decoration: none;
+  color: var(--cor-texto-claro);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.menu-link:hover {
+  color: #ffffff;
+  border-bottom: 2px solid var(--cor-texto-claro);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
