@@ -40,7 +40,7 @@ function Login() {
         alert(`Que bom te ver, ${usuario.nome}!`);
         
      
-        navigate('/'); 
+        navigate('/dashboard'); 
       } else {
        
         alert("Email ou senha incorretos.");
