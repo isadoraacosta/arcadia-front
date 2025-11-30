@@ -13,9 +13,6 @@ function CadastrarLivro() {
     autor: '',
     genero: '',
     ano: '',
-    status: 'quero-ler',
-    imagem: '',
-    descricao: ''
   });
 
   const [previewImagem, setPreviewImagem] = useState(null);
@@ -64,8 +61,6 @@ function CadastrarLivro() {
 
     const novoLivro = {
       ...formData,
-      usuarioId: usuario ? usuario.id : null, 
-      dataCadastro: new Date().toISOString()
     };
 
     try {
@@ -206,51 +201,6 @@ function CadastrarLivro() {
             </div>
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
-              <label style={labelStyle}>Estado da Leitura</label>
-              <select 
-                name="status" 
-                className="form-input" 
-                value={formData.status}
-                onChange={handleChange}
-                style={{ height: '48px' }}
-              >
-                <option value="quero-ler">Quero Ler (Lista de Desejos)</option>
-                <option value="lendo">Lendo Atualmente</option>
-                <option value="lido">Leitura Concluída</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label style={labelStyle}>Imagem da Capa (Anexo)</label>
-              <input 
-                type="file" 
-                accept="image/*"
-                className="form-input" 
-                onChange={handleImageChange}
-                style={{ paddingTop: '10px' }}
-              />
-              {previewImagem && (
-                <div style={{ marginTop: '10px', textAlign: 'center' }}>
-                  <img src={previewImagem} alt="Pré-visualização" style={{ maxHeight: '100px', borderRadius: '4px', border: '1px solid #452f02' }} />
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label style={labelStyle}>Sinopse ou Anotações Pessoais</label>
-            <textarea 
-              name="descricao" 
-              className="form-input" 
-              rows="4" 
-              placeholder="Escreva aqui sobre o que se trata esta obra..."
-              value={formData.descricao}
-              onChange={handleChange}
-              style={{ resize: 'vertical' }}
-            ></textarea>
-          </div>
 
           <div style={{ textAlign: 'center', marginTop: '30px' }}>
             <button type="submit" className="btn btn-explore" style={{ padding: '15px 50px', marginBottom: '20px'}}>
