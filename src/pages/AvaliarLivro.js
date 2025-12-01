@@ -26,6 +26,8 @@ function AvaliarLivro() {
       comentario: comentario,
       usuarioId: parseInt(usuario.id),
       livroIsbn: livro.isbn
+      usuarioId: parseInt(usuario.id),
+      livroIsbn: livro.isbn
     };
 
     try {
@@ -37,15 +39,17 @@ function AvaliarLivro() {
 
       if (response.ok) {
         alert("Avaliação registrada com sucesso!");
-        navigate(`/perfil/${usuario.id}`);
+        navigate('/dashboard');
       } else {
         const errorText = await response.text();
         console.error('Erro ao salvar:', errorText);
         alert("Erro ao salvar avaliação no servidor.");
+        navigate('/dashboard');
       }
     } catch (error) {
       console.error('Erro de conexão:', error);
       alert("Erro de conexão. Avaliação não salva.");
+      navigate('/dashboard');
     }
   };
 
@@ -109,6 +113,7 @@ function AvaliarLivro() {
             
             <button 
               type="button" 
+              onClick={() => navigate('/dashboard')}
               onClick={() => navigate('/dashboard')}
               style={{ 
                 background: 'none', 
