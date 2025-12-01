@@ -1,72 +1,81 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Layout from '../components/Layout';
+import LayoutLogado from '../components/LayoutLogado';
 import ResenhaCard from '../components/ResenhaCard';
 import '../App.css';
-import './Explorar.css';
 
 const Explorar = () => {
     const navigate = useNavigate();
-    
-    const avaliacoes = [
-        { 
-            id: 1, 
-            usuario: 'Natália Bonatto', 
-            usuarioId: 1, 
-            foto: '/avatar-natalia.jpg',
-            livro: 'A Barraca do Beijo',
-            nota: 4,
-            data: '15 de Janeiro de 2024',
-            comentario: 'Uma leitura envolvente e apaixonante! A história consegue prender do início ao fim com seus personagens carismáticos e situações divertidas. Recomendo para quem gosta de romances juvenis leves e descontraídos.' 
-        },
-        { 
-            id: 2, 
-            usuario: 'João Silva', 
-            usuarioId: 2, 
-            foto: '/avatar-joao.jpg',
-            livro: '1984',
-            nota: 5,
-            data: '12 de Janeiro de 2024',
-            comentario: 'Um clássico atemporal que nos faz refletir sobre liberdade, controle e sociedade. A escrita de Orwell é magistral e a história permanece extremamente relevante nos dias de hoje.' 
-        },
-        { 
-            id: 3, 
-            usuario: 'Maria Santos', 
-            usuarioId: 3, 
-            foto: '/avatar-maria.jpg',
-            livro: 'O Pequeno Príncipe',
-            nota: 5,
-            data: '10 de Janeiro de 2024',
-            comentario: 'Uma obra linda e profunda que toca o coração em qualquer idade. As metáforas sobre a vida, amor e amizade são simplesmente perfeitas. Um livro para ler e reler.' 
-        },
-    ];
+    const [avaliacoes, setAvaliacoes] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    const handleUsuarioClick = (usuarioId) => {
-        navigate(`/perfil/${usuarioId}`);
+    useEffect(() => {
+        fetchAvaliacoes();
+    }, []);
+
+    const fetchAvaliacoes = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/avaliacoes');
+            if (response.ok) {
+                const data = await response.json();
+                // Ordenar por data mais recente primeiro
+                const sortedData = data.sort((a, b) => new Date(b.dataAvaliacao) - new Date(a.dataAvaliacao));
+                setAvaliacoes(sortedData);
+            } else {
+                console.error('Erro ao buscar avaliações');
+            }
+        } catch (error) {
+            console.error('Erro de conexão:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const formatarData = (dataString) => {
+        const data = new Date(dataString);
+        return data.toLocaleDateString('pt-BR', { 
+            day: 'numeric', 
+            month: 'long', 
+            year: 'numeric' 
+        });
     };
 
     return (
-        <Layout>
-            <div className="explorar-container">
-                <h1 className="explorar-title">Explorar Avaliações</h1>
-                
-                <div className="resenhas-container">
-                    {avaliacoes.map(avaliacao => (
-                        <ResenhaCard
-                            key={avaliacao.id}
-                            usuario={avaliacao.usuario}
-                            usuarioId={avaliacao.usuarioId}
-                            foto={avaliacao.foto}
-                            livro={avaliacao.livro}
-                            nota={avaliacao.nota}
-                            data={avaliacao.data}
-                            comentario={avaliacao.comentario}
-                            onUsuarioClick={handleUsuarioClick}
-                        />
-                    ))}
+        <LayoutLogado>
+            <div className="hero-content" style={{ minHeight: 'auto', paddingTop: '40px' }}>
+                <h1 className="dashboard-title" style={{ fontSize: '60px', fontFamily: 'Cinzel, serif' }}>
+                    Avaliações
+                </h1>
+                <div className="divider"></div>
+            </div>
+            
+            <div className="form-scroll-container">
+                <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
+                    {loading ? (
+                        <p style={{ textAlign: 'center', color: 'var(--cor-tinta)' }}>
+                            Carregando avaliações...
+                        </p>
+                    ) : avaliacoes.length === 0 ? (
+                        <p style={{ textAlign: 'center', color: 'var(--cor-tinta)' }}>
+                            Nenhuma avaliação disponível ainda.
+                        </p>
+                    ) : (
+                        avaliacoes.map(avaliacao => (
+                            <ResenhaCard
+                                key={avaliacao.id}
+                                usuario={avaliacao.usuario?.nome || 'Usuário'}
+                                usuarioId={avaliacao.usuario?.id}
+                                foto={avaliacao.usuario?.foto || '/avatar-default.jpg'}
+                                livro={avaliacao.livro?.titulo || 'Livro'}
+                                nota={avaliacao.nota}
+                                data={formatarData(avaliacao.dataAvaliacao)}
+                                comentario={avaliacao.comentario}
+                            />
+                        ))
+                    )}
                 </div>
             </div>
-        </Layout>
+        </LayoutLogado>
     );
 };
 

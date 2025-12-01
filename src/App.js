@@ -5,11 +5,9 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import CadastrarLivro from './pages/CadastrarLivro';
-
-
 import AvaliarLivro from './pages/AvaliarLivro'; 
-
 import Explorar from './pages/Explorar';
+import MinhaEstante from './pages/MinhaEstante';
 
 import './App.css'; 
 
@@ -23,14 +21,13 @@ function App() {
         
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/cadastrar-livro" element={<CadastrarLivro />} />
-
         <Route path="/avaliar-livro" element={<AvaliarLivro />} />
-        
+        <Route path="/explorar" element={<Explorar />} />
+        <Route path="/perfil/:id" element={<MinhaEstante />} />
         
         <Route path="/minhas-metas" element={<div style={{padding: '50px', textAlign: 'center', color: '#452f02'}}><h2>Metas (Em Breve)</h2></div>} />
         <Route path="/biblioteca" element={<div style={{padding: '50px', textAlign: 'center', color: '#452f02'}}><h2>Grande Biblioteca (Em Breve)</h2></div>} />
         <Route path="/clubes" element={<div style={{padding: '50px', textAlign: 'center', color: '#452f02'}}><h2>Clubes (Em Breve)</h2></div>} />
-        <Route path="/explorar" element={<Explorar />} />
       </Routes>
     </Router>
   );

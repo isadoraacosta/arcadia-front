@@ -25,7 +25,6 @@ function Login() {
     e.preventDefault();
 
     try {
-  
       const response = await fetch('http://localhost:8080/api/usuarios/login', {
         method: 'POST',
         headers: {
@@ -35,19 +34,20 @@ function Login() {
       });
 
       if (response.ok) {
-    
         const usuario = await response.json();
-        alert(`Que bom te ver, ${usuario.nome}!`);
         
-     
-        navigate('/dashboard'); 
+        // Salvar dados do usuário no localStorage
+        localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+        
+        // Redirecionar para o dashboard
+        navigate('/dashboard');
       } else {
-       
-        alert("Email ou senha incorretos.");
+        const erro = await response.text();
+        alert(erro || 'Email ou senha incorretos!');
       }
     } catch (error) {
-      console.error("Erro de conexão:", error);
-      alert("Não foi possível conectar com o servidor :(");
+      console.error('Erro ao fazer login:', error);
+      alert('Erro ao conectar com o servidor. Tente novamente.');
     }
   };
 

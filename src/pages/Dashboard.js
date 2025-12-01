@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Layout from '../components/Layout';
+import LayoutLogado from '../components/LayoutLogado';
 import FeatureCard from '../components/FeatureCard';
 import '../App.css';
 
@@ -20,7 +20,7 @@ function Dashboard() {
   if (!usuario) return null;
 
   return (
-    <Layout>
+    <LayoutLogado>
       <div className="hero-content">
         
         <h1 className="dashboard-title">
@@ -41,7 +41,7 @@ function Dashboard() {
 
       <div className="features-container">
         
-        <div onClick={() => navigate('/minha-estante')}>
+        <div onClick={() => navigate(`/perfil/${usuario.id}`)}>
           <FeatureCard 
             title="Minha Estante" 
             description="Seu acervo pessoal. Visualize livros lidos, em andamento e sua lista de desejos."
@@ -90,7 +90,7 @@ function Dashboard() {
           />
         </div>
       </div>
-    </Layout>
+    </LayoutLogado>
   );
 }
 

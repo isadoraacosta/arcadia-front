@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Layout from '../components/Layout';
+import LayoutLogado from '../components/LayoutLogado';
 import '../App.css';
 
 function CadastrarLivro() {
@@ -125,7 +125,7 @@ function CadastrarLivro() {
   };
 
   return (
-    <Layout>
+    <LayoutLogado>
       <div className="hero-content" style={{ minHeight: 'auto', paddingTop: '40px' }}>
         <h1 className="dashboard-title" style={{ fontSize: '80px', fontFamily: 'Cinzel, serif' }}>Novo Livro</h1>
         <h2 className="dashboard-subtitle">Catalogar obra no acervo</h2>
@@ -210,7 +210,7 @@ function CadastrarLivro() {
 
         </form>
       </div>
-    </Layout>
+    </LayoutLogado>
   );
 }
 

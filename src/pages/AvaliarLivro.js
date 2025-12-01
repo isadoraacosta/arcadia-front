@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Layout from '../components/Layout';
+import LayoutLogado from '../components/LayoutLogado';
 import '../App.css';
 
 function AvaliarLivro() {
@@ -24,8 +24,8 @@ function AvaliarLivro() {
     const novaAvaliacao = {
       nota: parseInt(nota),
       comentario: comentario,
-      usuario: { id: usuario.id },
-      livro: { isbn: livro.isbn }
+      usuarioId: parseInt(usuario.id),
+      livroIsbn: livro.isbn
     };
 
     try {
@@ -37,15 +37,15 @@ function AvaliarLivro() {
 
       if (response.ok) {
         alert("Avaliação registrada com sucesso!");
-        navigate('/minha-estante');
+        navigate(`/perfil/${usuario.id}`);
       } else {
+        const errorText = await response.text();
+        console.error('Erro ao salvar:', errorText);
         alert("Erro ao salvar avaliação no servidor.");
-        navigate('/minha-estante');
       }
     } catch (error) {
-      console.error(error);
+      console.error('Erro de conexão:', error);
       alert("Erro de conexão. Avaliação não salva.");
-      navigate('/minha-estante');
     }
   };
 
@@ -60,7 +60,7 @@ function AvaliarLivro() {
   };
 
   return (
-    <Layout>
+    <LayoutLogado>
       <div className="hero-content" style={{ minHeight: 'auto', paddingTop: '40px' }}>
         <h1 className="dashboard-title" style={{ fontSize: '60px', fontFamily: 'Cinzel, serif' }}>
           Avaliar Leitura
@@ -109,7 +109,7 @@ function AvaliarLivro() {
             
             <button 
               type="button" 
-              onClick={() => navigate('/minha-estante')}
+              onClick={() => navigate('/dashboard')}
               style={{ 
                 background: 'none', 
                 border: 'none', 
@@ -125,7 +125,7 @@ function AvaliarLivro() {
 
         </form>
       </div>
-    </Layout>
+    </LayoutLogado>
   );
 }
 
