@@ -57,7 +57,7 @@ function Dashboard() {
           />
         </div>
 
-        <div onClick={() => navigate('/biblioteca')}>
+        <div onClick={() => navigate('/grande-biblioteca')}>
           <FeatureCard 
             title="Grande Biblioteca" 
             description="Adentre os arquivos de Arcadia. Descubra novas obras e veja avaliações."
@@ -67,17 +67,9 @@ function Dashboard() {
 
         <div onClick={() => navigate('/cadastrar-livro')}>
           <FeatureCard 
-            title="Catalogar Novo Tomo" 
+            title="Catalogar Novo Livro" 
             description="Contribua para a expansão do reino registrando obras ainda não descobertas."
             delay="0.6s"
-          />
-        </div>
-
-        <div onClick={() => navigate('/clubes')}>
-          <FeatureCard 
-            title="Guildas & Clubes" 
-            description="Reúna-se com outros viajantes no salão comunal para debater grandes histórias."
-            delay="0.8s"
           />
         </div>
 

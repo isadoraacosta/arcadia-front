@@ -9,6 +9,7 @@ import AvaliarLivro from './pages/AvaliarLivro';
 import MinhasMetas from './pages/MinhasMetas';
 import Explorar from './pages/Explorar';
 import MinhaEstante from './pages/MinhaEstante';
+import GrandeBiblioteca from './pages/GrandeBiblioteca';
 
 import './App.css'; 
 
@@ -28,9 +29,8 @@ function App() {
 
         <Route path="/explorar" element={<Explorar />} />
         <Route path="/perfil/:id" element={<MinhaEstante />} />
+        <Route path="/grande-biblioteca" element={<GrandeBiblioteca />} />
         
-        <Route path="/minhas-metas" element={<div style={{padding: '50px', textAlign: 'center', color: '#452f02'}}><h2>Metas (Em Breve)</h2></div>} />
-        <Route path="/biblioteca" element={<div style={{padding: '50px', textAlign: 'center', color: '#452f02'}}><h2>Grande Biblioteca (Em Breve)</h2></div>} />
         <Route path="/clubes" element={<div style={{padding: '50px', textAlign: 'center', color: '#452f02'}}><h2>Clubes (Em Breve)</h2></div>} />
       </Routes>
     </BrowserRouter>
