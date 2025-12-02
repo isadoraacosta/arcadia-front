@@ -43,7 +43,7 @@ const Explorar = () => {
     return (
         <LayoutLogado>
             <div className="hero-content" style={{ minHeight: 'auto', paddingTop: '40px' }}>
-                <h1 className="dashboard-title" style={{ fontSize: '60px', fontFamily: 'Cinzel, serif' }}>
+                <h1 className="dashboard-title" style={{ fontSize: '80px', fontFamily: 'Cinzel, serif' }}>
                     Avaliações
                 </h1>
                 <div className="divider"></div>

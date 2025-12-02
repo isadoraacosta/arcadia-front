@@ -103,7 +103,7 @@ h1 {
   font-family: var(--fonte-texto);
   font-size: 22px;
   margin-bottom: 40px;
-  color: var (--cor-texto);
+  color: var(--cor-texto);
   line-height: 1.6;
   font-style: italic;
   margin-top: 20px;
@@ -315,8 +315,6 @@ p {
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
-/* do explorar */
-
 .explorar-container {
   max-width: 800px;
   margin: 0 auto;
@@ -386,7 +384,6 @@ p {
   background: #f1efe5 !important;
 }
 
-/* Estilos do Perfil */
 .perfil-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -458,7 +455,7 @@ p {
 .stat-numero {
   font-family: var(--fonte-botoes);
   font-size: 42px;
-  color: var (--cor-texto-claro);
+  color: var(--cor-texto-claro);
   font-weight: 700;
   margin-bottom: 5px;
 }
@@ -510,84 +507,100 @@ p {
 
 .livros-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 30px;
   padding: 20px 0;
 }
 
+@media (max-width: 900px) {
+  .livros-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .livros-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .livro-card {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   border: 1px solid var(--cor-tinta);
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(69, 47, 2, 0.2);
+  box-shadow: 0 4px 10px rgba(69, 47, 2, 0.15);
+  display: flex;
+  flex-direction: column; 
+  height: 100%; 
 }
 
 .livro-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(69, 47, 2, 0.4);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(69, 47, 2, 0.3);
 }
 
 .livro-capa {
   width: 100%;
-  height: 250px;
-  object-fit: cover;
+  height: 300px;
+  overflow: hidden;
   border-bottom: 1px solid var(--cor-tinta);
+  position: relative;
+}
+
+.livro-capa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.livro-card:hover .livro-capa img {
+  transform: scale(1.05);
 }
 
 .livro-info {
-  padding: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .livro-titulo {
   font-family: var(--fonte-botoes);
-  font-size: 16px;
+  font-size: 18px;
   color: var(--cor-tinta);
-  margin: 0 0 8px 0;
+  margin: 0 0 10px 0;
   font-weight: 700;
-  line-height: 1.3;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .livro-autor {
   font-family: var(--fonte-texto);
-  font-size: 14px;
+  font-size: 15px;
   color: var(--cor-tinta-clara);
-  margin: 0;
+  margin: 0 0 15px 0;
   font-style: italic;
 }
 
-.livro-progresso {
-  margin-top: 12px;
-}
-
-.progresso-barra {
-  width: 100%;
-  height: 8px;
-  background: rgba(69, 47, 2, 0.2);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: 5px;
-}
-
-.progresso-preenchido {
-  height: 100%;
-  background: var(--cor-tinta);
-  border-radius: 4px;
-  transition: width 0.3s ease;
-}
-
-.progresso-texto {
-  font-family: var(--fonte-botoes);
+.livro-meta {
+  margin-top: auto;
+  border-top: 1px dashed rgba(69, 47, 2, 0.2);
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
   font-size: 12px;
-  color: var(--cor-tinta);
-  font-weight: 700;
+  color: #5e4003;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .mensagem-vazia {
@@ -597,4 +610,100 @@ p {
   font-size: 18px;
   font-style: italic;
   padding: 60px 20px;
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 0 20px 60px 20px;
+}
+
+.form-container {
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--cor-tinta);
+  border-radius: 8px;
+  padding: 40px 50px;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 4px 15px rgba(69, 47, 2, 0.1);
+  box-sizing: border-box;
+}
+
+.form-row {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.small {
+  flex: 1;
+}
+
+.form-group.large {
+  flex: 2;
+}
+
+.form-group.full {
+  flex: 1;
+  width: 100%;
+}
+
+.form-label {
+  font-family: var(--fonte-botoes);
+  color: var(--cor-tinta);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-input {
+  background-color: #fffdf5;
+  border: 1px solid rgba(69, 47, 2, 0.4);
+  padding: 14px;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--cor-tinta);
+  box-shadow: 0 0 0 3px rgba(69, 47, 2, 0.1);
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px dashed rgba(69, 47, 2, 0.2);
+}
+
+.form-actions .btn-explore {
+  padding: 16px 60px;
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .form-container {
+    padding: 30px 20px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group.small, 
+  .form-group.large {
+    flex: auto;
+    width: 100%;
+  }
 }

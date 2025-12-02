@@ -12,11 +12,8 @@ function CadastrarLivro() {
     titulo: '',
     autor: '',
     genero: '',
-    ano: '',
-    usuarioId: parseInt(usuario?.id) || 1,
+    ano: ''
   });
-
-  const [previewImagem, setPreviewImagem] = useState(null);
 
   useEffect(() => {
     const dadosSalvos = localStorage.getItem('usuarioLogado');
@@ -35,25 +32,13 @@ function CadastrarLivro() {
     }));
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      
-      reader.onloadend = () => {
-        setFormData(prevState => ({
-          ...prevState,
-          imagem: reader.result
-        }));
-        setPreviewImagem(reader.result);
-      };
-      
-      reader.readAsDataURL(file);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!usuario || !usuario.id) {
+        alert("Erro: Usuário não identificado. Faça login novamente.");
+        return;
+    }
 
     if (!formData.titulo || !formData.autor) {
       alert("Por favor, preencha pelo menos o Título e o Autor.");
@@ -61,7 +46,12 @@ function CadastrarLivro() {
     }
 
     const novoLivro = {
-      ...formData,
+      titulo: formData.titulo,
+      autor: formData.autor,
+      genero: formData.genero,
+      isbn: formData.isbn,
+      ano: parseInt(formData.ano) || 0,
+      usuarioId: usuario.id 
     };
 
     try {
@@ -74,56 +64,18 @@ function CadastrarLivro() {
       });
 
       if (response.ok) {
-        const livroSalvo = await response.json();
-        alert("O livro foi inscrito nos registros de Arcadia com sucesso!");
-        
-        navigate('/avaliar-livro', { 
-            state: { 
-                livro: livroSalvo,
-                usuario: usuario 
-            } 
-        });
-
+        alert("Livro salvo na sua estante com sucesso!");
+        navigate(`/avaliar-livro`); // Redirecionando para a estante
       } else {
-        const livroSemImagem = { ...novoLivro, imagem: '' };
-        const livrosAntigos = JSON.parse(localStorage.getItem('livrosArcadia')) || [];
-        localStorage.setItem('livrosArcadia', JSON.stringify([...livrosAntigos, livroSemImagem]));
-        
-        alert("Salvo localmente (sem imagem devido ao limite de armazenamento)!");
-        
-        navigate('/avaliar-livro', { 
-            state: { 
-                livro: livroSemImagem,
-                usuario: usuario 
-            } 
-        });
+        alert("Erro ao salvar no servidor.");
       }
     } catch (error) {
       console.error(error);
-      const livroSemImagem = { ...novoLivro, imagem: '' };
-      const livrosAntigos = JSON.parse(localStorage.getItem('livrosArcadia')) || [];
-      localStorage.setItem('livrosArcadia', JSON.stringify([...livrosAntigos, livroSemImagem]));
-      
-      alert("Salvo localmente (sem imagem devido ao erro de conexão)!");
-      
-      navigate('/avaliar-livro', { 
-        state: { 
-            livro: livroSemImagem,
-            usuario: usuario 
-        } 
-      });
+      alert("Erro de conexão com o servidor.");
     }
   };
 
   if (!usuario) return null;
-
-  const labelStyle = {
-    fontSize: '18px',
-    marginBottom: '8px',
-    color: '#452f02',
-    fontFamily: 'Cinzel, serif',
-    fontWeight: '700'
-  };
 
   return (
     <LayoutLogado>
@@ -133,83 +85,82 @@ function CadastrarLivro() {
         <div className="divider"></div>
       </div>
 
-      <div className="form-scroll-container">
-        <form onSubmit={handleSubmit} className="book-form">
-          
-          <div className="form-row">
-            <div className="form-group" style={{ flex: 1 }}>
-              <label style={labelStyle}>ISBN</label>
-              <input 
-                type="text" 
-                name="isbn" 
-                className="form-input" 
-                placeholder="Ex: 978-85-..."
-                value={formData.isbn}
-                onChange={handleChange}
-              />
-            </div>
+      <div className="form-wrapper">
+        <div className="form-container">
+            <form onSubmit={handleSubmit} className="book-form">
             
-            <div className="form-group" style={{ flex: 2 }}>
-              <label style={labelStyle}>Título da Obra</label>
-              <input 
-                type="text" 
-                name="titulo" 
-                className="form-input" 
-                placeholder="Ex: O Nome do Vento"
-                value={formData.titulo}
-                onChange={handleChange}
-              />
+            <div className="form-row">
+                <div className="form-group small">
+                    <label className="form-label">ISBN</label>
+                    <input 
+                        type="text" 
+                        name="isbn" 
+                        className="form-input" 
+                        placeholder="Ex: 978-85-..." 
+                        value={formData.isbn} 
+                        onChange={handleChange} 
+                    />
+                </div>
+                <div className="form-group large">
+                    <label className="form-label">Título da Obra</label>
+                    <input 
+                        type="text" 
+                        name="titulo" 
+                        className="form-input" 
+                        placeholder="Ex: O Nome do Vento" 
+                        value={formData.titulo} 
+                        onChange={handleChange} 
+                    />
+                </div>
             </div>
-          </div>
 
-          <div className="form-row">
-            <div className="form-group" style={{ flex: 2 }}>
-              <label style={labelStyle}>Autor(a)</label>
-              <input 
-                type="text" 
-                name="autor" 
-                className="form-input" 
-                placeholder="Ex: Patrick Rothfuss"
-                value={formData.autor}
-                onChange={handleChange}
-              />
+            <div className="form-row">
+                <div className="form-group large">
+                    <label className="form-label">Autor(a)</label>
+                    <input 
+                        type="text" 
+                        name="autor" 
+                        className="form-input" 
+                        placeholder="Ex: Patrick Rothfuss" 
+                        value={formData.autor} 
+                        onChange={handleChange} 
+                    />
+                </div>
+                <div className="form-group small">
+                    <label className="form-label">Ano de Publicação</label>
+                    <input 
+                        type="number" 
+                        name="ano" 
+                        className="form-input" 
+                        placeholder="Ex: 2007" 
+                        value={formData.ano} 
+                        onChange={handleChange} 
+                    />
+                </div>
             </div>
 
-            <div className="form-group" style={{ flex: 1 }}>
-              <label style={labelStyle}>Ano de Publicação</label>
-              <input 
-                type="number" 
-                name="ano" 
-                className="form-input" 
-                placeholder="Ex: 2007"
-                value={formData.ano}
-                onChange={handleChange}
-              />
+            <div className="form-row">
+                <div className="form-group full">
+                    <label className="form-label">Gênero Literário</label>
+                    <input 
+                        type="text" 
+                        name="genero" 
+                        className="form-input" 
+                        placeholder="Ex: Fantasia, Romance..." 
+                        value={formData.genero} 
+                        onChange={handleChange} 
+                    />
+                </div>
             </div>
-          </div>
 
-          <div className="form-row">
-            <div className="form-group" style={{ flex: 1 }}>
-              <label style={labelStyle}>Gênero Literário</label>
-              <input 
-                type="text" 
-                name="genero" 
-                className="form-input" 
-                placeholder="Ex: Fantasia, Romance..."
-                value={formData.genero}
-                onChange={handleChange}
-              />
+            <div className="form-actions">
+                <button type="submit" className="btn btn-explore">
+                Inscrever nos Registros
+                </button>
             </div>
-          </div>
 
-
-          <div style={{ textAlign: 'center', marginTop: '30px' }}>
-            <button type="submit" className="btn btn-explore" style={{ padding: '15px 50px', marginBottom: '20px'}}>
-              Inscrever nos Registros
-            </button>
-          </div>
-
-        </form>
+            </form>
+        </div>
       </div>
     </LayoutLogado>
   );
