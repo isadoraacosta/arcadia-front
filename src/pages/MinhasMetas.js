@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import '../App.css';
+import LayoutLogado from '../components/LayoutLogado';
 
 function MinhasMetas() {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ function MinhasMetas() {
 
     const dto = {
       descricao: novaMeta,
-      usuarioId: usuario?.id || 1 
+      usuarioId: parseInt(usuario?.id) || 1 
     };
 
     try {
@@ -107,7 +108,7 @@ function MinhasMetas() {
   };
 
   return (
-    <Layout>
+    <LayoutLogado>
       <div className="hero-content" style={{ minHeight: 'auto', paddingTop: '40px' }}>
         <h1 className="dashboard-title" style={{ fontSize: '80px', fontFamily: 'Cinzel, serif' }}>
           Pergaminho de Metas
@@ -254,7 +255,7 @@ function MinhasMetas() {
         </div>
 
       </div>
-    </Layout>
+    </LayoutLogado>
   );
 }
 

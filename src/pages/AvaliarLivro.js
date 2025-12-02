@@ -25,7 +25,7 @@ function AvaliarLivro() {
       nota: parseInt(nota),
       comentario: comentario,
       usuarioId: parseInt(usuario.id),
-      livroIsbn: livro.isbn
+      livroIsbn: livro.isbn,
       usuarioId: parseInt(usuario.id),
       livroIsbn: livro.isbn
     };
