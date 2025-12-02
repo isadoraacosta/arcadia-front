@@ -125,29 +125,27 @@ function MinhasMetas() {
       <div className="form-scroll-container" style={{ maxWidth: '900px', margin: '0 auto', paddingBottom: '100px' }}>
         
         <form onSubmit={adicionarMeta} className="book-form" style={{ marginBottom: '50px' }}>
-          <div className="form-row" style={{ alignItems: 'flex-end' }}> 
-            
-            <div className="form-group" style={{ flex: 3 }}>
-              <label style={labelStyle}>Novo Objetivo</label>
-              <input 
-                type="text" 
-                className="form-input" 
-                placeholder="Ex: Ler 12 clássicos este ano..."
-                value={novaMeta}
-                onChange={(e) => setNovaMeta(e.target.value)}
-              />
-            </div>
-
-            <div className="form-group" style={{ flex: 1 }}>
-              <button 
-                type="submit" 
-                className="btn btn-explore" 
-                style={{ width: '100%', padding: '12px', height: '46px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-              >
-                Selar Juramento
-              </button>
-            </div>
-
+          <div className="form-group" style={{ width: '100%' }}>
+            <label style={labelStyle}>Novo Objetivo</label>
+            <input 
+              type="text" 
+              className="form-input" 
+              placeholder="Ex: Ler 12 clássicos este ano..."
+              value={novaMeta}
+              onChange={(e) => setNovaMeta(e.target.value)}
+            />
+            <button 
+              type="submit" 
+              className="btn btn-explore" 
+              style={{ 
+                width: '100%', 
+                padding: '16px 40px', 
+                fontSize: '18px',
+                marginTop: '20px'
+              }}
+            >
+              Selar Juramento
+            </button>
           </div>
         </form>
 

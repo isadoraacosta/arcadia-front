@@ -61,11 +61,18 @@ function MinhaEstante() {
                 Consultando os arquivos...
             </div>
         ) : (
-            <div className="livros-grid">
+            <>
             {livros.length === 0 ? (
-                <div className="mensagem-vazia" style={{ gridColumn: '1 / -1', textAlign: 'center' }}>
-                    <p style={{ fontFamily: 'Crimson Text, serif', fontSize: '22px', fontStyle: 'italic', color: '#5e4003' }}>
-                        Sua estante ainda está vazia. Vá até "Novo Livro" para começar sua coleção.
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    minHeight: '400px',
+                    textAlign: 'center'
+                }}>
+                    <p style={{ fontFamily: 'Crimson Text, serif', fontSize: '22px', fontStyle: 'italic', color: '#5e4003', maxWidth: '500px' }}>
+                        Sua estante ainda está vazia. Vá até "Cadastrar Livro" para começar sua coleção.
                     </p>
                     <button 
                         className="btn btn-explore" 
@@ -76,7 +83,8 @@ function MinhaEstante() {
                     </button>
                 </div>
             ) : (
-                livros.map((livro) => (
+                <div className="livros-grid">
+                {livros.map((livro) => (
                 <div key={livro.id} className="livro-card">
                     <div className="livro-capa">
                         <img 
@@ -99,9 +107,10 @@ function MinhaEstante() {
                         </div>
                     </div>
                 </div>
-                ))
+                ))}
+                </div>
             )}
-            </div>
+            </>
         )}
       </div>
     </LayoutLogado>
