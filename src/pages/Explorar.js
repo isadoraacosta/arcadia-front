@@ -8,6 +8,7 @@ const Explorar = () => {
     const navigate = useNavigate();
     const [avaliacoes, setAvaliacoes] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [erro, setErro] = useState(null);
 
     useEffect(() => {
         fetchAvaliacoes();
@@ -15,6 +16,8 @@ const Explorar = () => {
 
     const fetchAvaliacoes = async () => {
         try {
+            setLoading(true);
+            setErro(null);
             const response = await fetch('http://localhost:8080/avaliacoes');
             if (response.ok) {
                 const data = await response.json();
@@ -22,9 +25,11 @@ const Explorar = () => {
                 const sortedData = data.sort((a, b) => new Date(b.dataAvaliacao) - new Date(a.dataAvaliacao));
                 setAvaliacoes(sortedData);
             } else {
-                console.error('Erro ao buscar avaliações');
+                setErro('Erro ao buscar avaliações. Tente novamente.');
+                console.error('Erro ao buscar avaliações:', response.status);
             }
         } catch (error) {
+            setErro('Erro de conexão com o servidor.');
             console.error('Erro de conexão:', error);
         } finally {
             setLoading(false);
@@ -38,6 +43,12 @@ const Explorar = () => {
             month: 'long', 
             year: 'numeric' 
         });
+    };
+
+    const handleUsuarioClick = (usuarioId) => {
+        if (usuarioId) {
+            navigate(`/perfil/${usuarioId}`);
+        }
     };
 
     return (
@@ -55,6 +66,10 @@ const Explorar = () => {
                         <p style={{ textAlign: 'center', color: 'var(--cor-tinta)' }}>
                             Carregando avaliações...
                         </p>
+                    ) : erro ? (
+                        <p style={{ textAlign: 'center', color: '#d32f2f', fontSize: '16px' }}>
+                            {erro}
+                        </p>
                     ) : avaliacoes.length === 0 ? (
                         <p style={{ textAlign: 'center', color: 'var(--cor-tinta)' }}>
                             Nenhuma avaliação disponível ainda.
@@ -70,6 +85,7 @@ const Explorar = () => {
                                 nota={avaliacao.nota}
                                 data={formatarData(avaliacao.dataAvaliacao)}
                                 comentario={avaliacao.comentario}
+                                onUsuarioClick={handleUsuarioClick}
                             />
                         ))
                     )}

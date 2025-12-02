@@ -65,7 +65,8 @@ function CadastrarLivro() {
 
       if (response.ok) {
         alert("Livro salvo na sua estante com sucesso!");
-        navigate(`/avaliar-livro`); // Redirecionando para a estante
+        // Redirecionar para a tela de avaliação passando os dados
+        navigate('/avaliar-livro', { state: { livro: novoLivro, usuario: usuario } });
       } else {
         alert("Erro ao salvar no servidor.");
       }

@@ -44,7 +44,7 @@ function Dashboard() {
         <div onClick={() => navigate(`/perfil/${usuario.id}`)}>
           <FeatureCard 
             title="Minha Estante" 
-            description="Seu acervo pessoal. Visualize livros lidos, em andamento e sua lista de desejos."
+            description="Seu acervo pessoal. Visualize livros lidos."
             delay="0s"
           />
         </div>
@@ -67,19 +67,13 @@ function Dashboard() {
 
         <div onClick={() => navigate('/cadastrar-livro')}>
           <FeatureCard 
-            title="Catalogar Novo Tomo" 
+            title="Catalogar Novo Livro" 
             description="Contribua para a expansão do reino registrando obras ainda não descobertas."
             delay="0.6s"
           />
         </div>
 
-        <div onClick={() => navigate('/clubes')}>
-          <FeatureCard 
-            title="Guildas & Clubes" 
-            description="Reúna-se com outros viajantes no salão comunal para debater grandes histórias."
-            delay="0.8s"
-          />
-        </div>
+      
 
 
         <div onClick={() => navigate('/explorar')}>

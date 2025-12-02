@@ -64,7 +64,7 @@ function LayoutLogado({ children }) {
           }}></div>
 
           <span style={{
-            color: '#f3eacb',
+            color: '#ffffff',
             fontSize: '14px',
             fontFamily: 'Cinzel, serif',
             fontWeight: '600',
