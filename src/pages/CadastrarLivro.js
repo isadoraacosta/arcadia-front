@@ -13,6 +13,7 @@ function CadastrarLivro() {
     autor: '',
     genero: '',
     ano: '',
+    usuarioId: parseInt(usuario?.id) || 1,
   });
 
   const [previewImagem, setPreviewImagem] = useState(null);
