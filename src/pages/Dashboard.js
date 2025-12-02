@@ -57,7 +57,7 @@ function Dashboard() {
           />
         </div>
 
-        <div onClick={() => navigate('/biblioteca')}>
+        <div onClick={() => navigate('/grande-biblioteca')}>
           <FeatureCard 
             title="Grande Biblioteca" 
             description="Adentre os arquivos de Arcadia. Descubra novas obras e veja avaliações."
